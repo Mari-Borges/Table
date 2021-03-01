@@ -1,36 +1,6 @@
 {
   "produto": [
     {
-      "id": 1,
-      "nomeProduto": "Arroz",
-      "valorProduto": 15.99
-    },
-    {
-      "id": 3,
-      "nomeProduto": "Farinha",
-      "valorProduto": 5.99
-    },
-    {
-      "id": 4,
-      "nomeProduto": "Feijão",
-      "valorProduto": 6.99
-    },
-    {
-      "id": 5,
-      "nomeProduto": "Peixe",
-      "valorProduto": 10.99
-    },
-    {
-      "id": 6,
-      "nomeProduto": "Biscoito",
-      "valorProduto": 4.99
-    },
-    {
-      "id": 7,
-      "nomeProduto": "Lapis",
-      "valorProduto": 1.99
-    },
-    {
       "id": 8,
       "nomeProduto": "Caderno",
       "valorProduto": 19.99
@@ -54,6 +24,16 @@
       "nomeProduto": "Caneta",
       "valorProduto": 7.86,
       "id": 13
+    },
+    {
+      "nomeProduto": "Caneca",
+      "valorProduto": 7.99,
+      "id": 14
+    },
+    {
+      "nomeProduto": "seg",
+      "valorProduto": 345,
+      "id": 15
     }
   ]
 }

@@ -23,12 +23,7 @@ import {CdkTableModule} from '@angular/cdk/table';
 import { FormsModule } from '@angular/forms';
 import { DialogComponent } from './dialog/dialog.component';
 import { EditComponent } from './edit/edit.component';
-
-
-
-
-
-
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -37,7 +32,6 @@ import { EditComponent } from './edit/edit.component';
     DialogComponent,
     EditComponent,
  
-    
   ],
   imports: [
     BrowserModule,
@@ -59,7 +53,7 @@ import { EditComponent } from './edit/edit.component';
     MatCardModule,
     CdkTableModule,
     FormsModule,
-    
+    ToastrModule.forRoot(), 
   
   ],
   providers: [],

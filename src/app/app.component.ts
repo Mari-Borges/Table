@@ -12,7 +12,6 @@ import { DialogComponent } from './dialog/dialog.component';
 import { EditComponent } from './edit/edit.component';
 import { MatTable } from '@angular/material/table';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -23,7 +22,7 @@ export class AppComponent {
  exampleDatabase: AppService | null;
  Columns : string[] = ['id', 'nomeProduto', 'valorProduto', 'actions'];
 
- dataSource!: FilesDataSource;
+ dataSource!: Banco;
  produtos : Produto[] = [];
  Produto!: Produto;
  index!: number;
@@ -36,17 +35,12 @@ export class AppComponent {
     public httpClient: HttpClient
     ){}
 
-   
     @ViewChild(MatSort) sort: MatSort;
    // @ViewChild('filter',  {static: true}) filter: ElementRef;
     @ViewChild(MatTable,{static:true}) table: MatTable<any>;
 
-    
-    
-
-
   ngOnInit(): void {
-    this.rs.getUsers().subscribe
+    this.rs.list().subscribe
     (
       (response)=>
       {
@@ -61,47 +55,39 @@ export class AppComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
-        // After dialog is closed we're doing frontend updates
-        // For add we're just pushing a new row inside DataService
-        this.exampleDatabase.dataChange.value.push(this.rs.getDialogData());
+        this.exampleDatabase.dataChange.value.push(this.rs.getDialog());
         //this.refreshTable();
       }
     });
   }
   Edit(i: number, id: number, nomeProduto: string, valorProduto: number) {
     this.id = id;
-    // index row is used just for debugging proposes and can be removed
     this.index = i;
-    console.log(this.index);
     const dialogRef = this.dialogService.open(EditComponent, {
-      data: {id: id, nomeProduto: nomeProduto, valorProduto: valorProduto}
-     
+      data: {id: id, nomeProduto: nomeProduto, valorProduto: valorProduto}  
     });
-  
+   
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
-        // When using an edit things are little different, firstly we find record inside DataService by id
-        const foundIndex = this.exampleDatabase.dataChange.value.findIndex(x => x.id === this.id);
-        // Then you update that record using data from dialogData (values you enetered)
-        this.exampleDatabase.dataChange.value[foundIndex] = this.rs.getDialogData();
-        // And lastly refresh table
+        const foundIndex = this.rs.dataChange.value.findIndex(x => x.id === this.id);
+        this.rs.dataChange.value[foundIndex] = this.rs.getDialog();
        // this.refreshTable();
       }
     });
-    console.log(this.dataSource)
+   // console.log(this.exampleDatabase);
   }
   Delete(i: number, id: number, nomeProduto: string, valorProduto: number) {
     this.index = i;
     this.id = id;
+    console.log(this.id);
     const dialogRef = this.dialogService.open(DialogComponent, {
       data: {id: id, nomeProduto: nomeProduto, valorProduto: valorProduto}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
-        const foundIndex = this.exampleDatabase.dataChange.value.findIndex(x => x.id === this.id);
-        // for delete we use splice in order to remove single object from DataService
-        this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
+        const foundIndex = this.rs.dataChange.value.findIndex(x => x.id === this.id);
+        this.rs.dataChange.value.splice(foundIndex, 1);
        // this.refreshTable();
       }
     });
@@ -110,17 +96,7 @@ export class AppComponent {
 }
 
 // dataSouce 
-  export class FilesDataSource extends DataSource<Produto> {
-
-    _filterChange = new BehaviorSubject('');
-
-   get filter(): any {
-    return this._filterChange.value;
-  }
-  set filter(filter: any) {
-    this._filterChange.next(filter);
-  }
-  filteredData: Produto[] = [];
+  export class Banco extends DataSource<Produto> {
     constructor(
       public rs: AppService
       ){
@@ -132,13 +108,7 @@ export class AppComponent {
       return this.rs.onContactsChanged
     }
     
-  
     disconnect(): void {
     
-
-  
-  function compare(a: number | string, b: number | string, isAsc: boolean): number {
-    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
-}
 }

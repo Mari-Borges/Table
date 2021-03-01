@@ -8,15 +8,15 @@
 <table mat-table [dataSource]="produtos" class="example-container mat-elevation-z8" >
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef> ID </th>
-    <td mat-cell *matCellDef="let produto"> {{produto.id}} </td>
+    <td mat-cell *matCellDef="let row"> {{row.id}} </td>
   </ng-container>
   <ng-container matColumnDef="nomeProduto">
     <th mat-header-cell *matHeaderCellDef> NOME DO PRODUTO </th>
-    <td mat-cell *matCellDef="let produto"> {{produto.nomeProduto}} </td>
+    <td mat-cell *matCellDef="let row"> {{row.nomeProduto}} </td>
   </ng-container>
   <ng-container matColumnDef="valorProduto">
     <th mat-header-cell *matHeaderCellDef> VALOR </th>
-    <td mat-cell *matCellDef="let produto"> R$ {{produto.valorProduto}} </td>
+    <td mat-cell *matCellDef="let row"> R$ {{row.valorProduto}} </td>
   </ng-container>
   <ng-container matColumnDef="actions">
     <mat-header-cell *matHeaderCellDef>
@@ -25,13 +25,13 @@
       </button>
     </mat-header-cell>
 
-    <mat-cell *matCellDef="let produto; let i=index;">
-      <button mat-icon-button color="accent"  (click)="Edit(produtos)">
+    <mat-cell *matCellDef="let row; let i=index;">
+      <button mat-icon-button color="accent"  (click)="Edit(i, row.id, row.nomeProduto, row.valorProduto)">
         <mat-icon aria-label="Edit">edit</mat-icon>
       </button>
 
       <button mat-icon-button color="accent" >
-        <mat-icon aria-label="Delete" (click)="Delete(produtos)">delete</mat-icon>
+        <mat-icon aria-label="Delete" (click)="Delete(i, row.id, row.nomeProduto, row.valorProduto)">delete</mat-icon>
       </button>
     </mat-cell>
   </ng-container>

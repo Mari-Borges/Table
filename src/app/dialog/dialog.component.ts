@@ -26,7 +26,7 @@ export class DialogComponent implements OnInit {
   }
 
   confirma(): void {
-    this.rs.deleteIssue(this.data.id);
-    console.log(this.data.id)
+    this.rs.delete(this.data);
+    console.log(this.data)
   }
 }

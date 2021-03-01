@@ -34,9 +34,9 @@ export class EditComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  stopEdit(): void {
-    this.dataService.updateIssue(this.data.id);
-    console.log(this.data.id)
+  Edit(): void {
+    this.dataService.Atualizar(this.data);
+  //  console.log(this.data);
   }
 
 }

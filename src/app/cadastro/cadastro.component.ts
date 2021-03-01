@@ -1,5 +1,4 @@
 import { Component, OnInit, Inject } from '@angular/core';
-
 import { AppService } from '../app.service';
 import { Produto } from '../mercado.interface';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -14,16 +13,12 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./cadastro.component.scss']
 })
 export class CadastroComponent implements OnInit {
-  // form!: FormGroup;
-  // form!: FormGroup;
-  //addEditMemberForm!: FormGroup;
   submitted!: boolean;
   form!: FormGroup;
 
   constructor(public dialogRef: MatDialogRef<CadastroComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Produto,
     private rs: AppService,
-    private readonly route: ActivatedRoute,
     public dialog: MatDialog,
     @Inject(DOCUMENT) private _document: Document
    
@@ -43,8 +38,7 @@ export class CadastroComponent implements OnInit {
     this.rs.create(this.data).subscribe()
     }
   getErrorMessage() {
-    return this.formControl.hasError('required') ? 'Required field' :
-      this.formControl.hasError('email') ? 'Not a valid email' :
+    return this.formControl.hasError('required') ? 'Required field' :   
         '';
   }
   Cancel(): void {
